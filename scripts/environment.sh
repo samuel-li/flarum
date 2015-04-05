@@ -43,5 +43,6 @@ bower install
 ember build
 
 ### Prepare the database
+cd /opt/flarum
 php artisan flarum:install
 php artisan flarum:seed
