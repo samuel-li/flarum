@@ -4,10 +4,10 @@ su - vagrant
 ### Setup NPM globals and create necessary directories ###
 sudo apt-get install -y phantomjs zsh exuberant-ctags
 mkdir /home/vagrant/npm
-mkdir -p /vagrant/flarum/core
+mkdir -p /opt/flarum/flarum/core
 sudo chown -R vagrant:vagrant /home/vagrant
 
-cp /vagrant/scripts/aliases ~/.aliases
+cp /opt/flarum/scripts/aliases ~/.aliases
 
 ### Create rc file ###
 if [ -e "/home/vagrant/.zshrc" ]
@@ -18,23 +18,29 @@ else
 fi
 
 ### Set up environment files and database ###
-cp /vagrant/.env.example /vagrant/.env
-mysql -u root -proot -e 'create database flarum'
+cp /opt/flarum/.env.example /opt/flarum/.env
+mysql -u root -plihl198073, -e 'create database flarum'
 
 ### Setup flarum/core and install dependencies ###
-cd /vagrant/core
+cd /opt/flarum/core
 composer install --prefer-dist
-cd /vagrant
+cd /opt/flarum
 composer install --prefer-dist
 composer dump-autoload
 
-mkdir /vagrant/core/public
-cd /vagrant/core/ember/forum
+mkdir /opt/flarum/core/public
+cd /opt/flarum/core/ember/common
 npm install
 bower install
-cd /vagrant/core/ember/admin
+ember build
+cd /opt/flarum/core/ember/forum
 npm install
 bower install
+ember build
+cd /opt/flarum/core/ember/admin
+npm install
+bower install
+ember build
 
 ### Prepare the database
 php artisan flarum:install

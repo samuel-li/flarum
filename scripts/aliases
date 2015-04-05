@@ -33,7 +33,7 @@ alias ccf='./vendor/bin/codecept Functional'
 alias ccu='./vendor/bin/codecept run Unit'
 
 #ember/js stuff
-alias ember='/vagrant/flarum/core/ember/forum/node_modules/ember-cli/bin/ember'
+alias ember='/opt/flarum/core/ember/forum/node_modules/ember-cli/bin/ember'
 
 #function aliases
 alias ghc=ghc

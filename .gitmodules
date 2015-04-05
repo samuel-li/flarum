@@ -1,4 +1,4 @@
 [submodule "core"]
 	path = core
-	url = git@github.com:flarum/core.git
+	url = git@github.com:samuel-li/core.git
 	branch = master

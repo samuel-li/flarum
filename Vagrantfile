@@ -60,11 +60,11 @@ composer_packages     = [        # List any global Composer packages that you wa
 # Default web server document root
 # Symfony's public directory is assumed "web"
 # Laravel's public directory is assumed "public"
-public_folder         = "/vagrant/public"
+public_folder         = "/opt/flarum/public"
 
-laravel_root_folder   = "/vagrant/laravel" # Where to install Laravel. Will `composer install` if a composer.json file exists
+laravel_root_folder   = "/opt/flarum/laravel" # Where to install Laravel. Will `composer install` if a composer.json file exists
 laravel_version       = "latest-stable" # If you need a specific version of Laravel, set it here
-symfony_root_folder   = "/vagrant/symfony" # Where to install Symfony.
+symfony_root_folder   = "/opt/flarum/symfony" # Where to install Symfony.
 
 nodejs_version        = "latest"   # By default "latest" will equal the latest stable version
 nodejs_packages       = [          # List any global NodeJS packages that you want to install
@@ -103,7 +103,7 @@ Vagrant.configure("2") do |config|
   config.vm.network :private_network, type: "dhcp"
 
   # Use NFS for the shared folder
-  config.vm.synced_folder ".", "/vagrant",
+  config.vm.synced_folder ".", "/opt/flarum",
             id: "core",
             :nfs => true,
             :mount_options => ['nolock,vers=3,udp,noatime,actimeo=1']
@@ -152,8 +152,8 @@ Vagrant.configure("2") do |config|
     }
   end
 
-  # Adding vagrant-digitalocean provider - https://github.com/smdahlen/vagrant-digitalocean
-  # Needs to ensure that the vagrant plugin is installed
+  # Adding /vagrant-digitalocean provider - https://github.com/smdahlen/vagrant-digitalocean
+  # Needs to ensure that the /vagrant plugin is installed
   config.vm.provider :digital_ocean do |provider, override|
     override.ssh.private_key_path = '~/.ssh/id_rsa'
     override.vm.box = 'digital_ocean'
